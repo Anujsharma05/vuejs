@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>vuejs</title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2 v-once>{{ title }}</h2>
+			<p>{{ sayHello() }} - <a :href="link" target="_blank">google</a></p>
+			<hr>
+			<p v-html="finishedLink"></p>
+			<button @click="increaseCounter">Click me</button>
+			<p>{{ counter * 2 >= 10 ? 'greater than 10' : 'smaller than 10'}}</p>
+			<p v-on:mousemove="updateCoordinates">{{ x }} / {{ y }} - <span v-on:mousemove.stop="">DEAD SPOT</span></p>
+			<input type="text" v-model="name">
+			<h3>{{ name }}</h3>
+			<hr>
+			<button @click="counter++">Increase</button>
+			<button @click="counter--">Decrease</button>
+			<p>{{ counterCheck }}</p>
+			<hr>
+			
+		</div>
+		<script>
+			var vm = new Vue({
+		el: '#app',
+		data: {
+			title: 'sparta',
+			link: 'https://www.google.com',
+			finishedLink: '<a href="https://www.google.com">Google</a>',
+			counter: 0,
+			x: 0,
+			y: 0,
+			name: 'Anuj',
+			result: ''
+		},
+		methods: {
+			sayHello: function() {
+				this.title = 'Hello';
+				return this.title;
+			},
+			increaseCounter() {
+				this.counter++;
+			},
+			updateCoordinates: function(event) {
+				this.x = event.clientX;
+				this.y = event.clientY;
+			}
+		},
+		computed: {
+			counterCheck: function(){
+				return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
+			}
+		},
+		watch: {
+			counter: function() {
+				console.log('inside watch');
+				var vm = this;
+				setTimeout(
+					function() {
+						vm.counter = 0;
+					}, 2000
+				);
+			},
+			name: function() {
+				console.log('printing name ' + this.name);
+			}
+		}
+		
+	});
+	// console.dir(vm._data.title);
+		</script>
+	</body>
+</html>

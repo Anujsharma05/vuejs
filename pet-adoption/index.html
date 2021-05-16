@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Yolo Pet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <header>
+            <h1>
+              YOLO PET ADOPTION
+            </h1>
+          </header>
+          <main>
+            <div class="backdrop" v-if="showPopup"></div>
+            <div class="pet-details__modal" v-if="showPopup">
+              <h1>My Name is <span id="pet-name"></span>!</h1>
+              <div class="pet-info__basic">
+                <div class="pet-image__container"><img id="pet-image" src="./cat.jpg" /></div>
+                <div class="pet-description">
+                  <h2>Facts About Me</h2>
+                  <ul>
+                    <li>Animal Type: <span id="pet-species"></span></li>
+                    <li>Gender: <span id="pet-gender"></span></li>
+                    <li>Age: <span id="pet-age"></span></li>
+                    <li>Description: <span id="pet-notes"></span></li>
+                    <li>Adoption Fee: $199</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="action-button">
+                <button>Adopt Me!</button>
+                <button @click="showPopup = false">Close</button>
+              </div>
+            </div>
+            <ul class="pets">
+             
+            </ul>
+          </main>
+
+        <script type="text/javascript" src="main.js"></script>
+    </body>
+</html>

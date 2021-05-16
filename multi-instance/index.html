@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>multi-instance</title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+    <body>
+        <div id="app1">
+            <h3>{{ name }}</h3>
+            <button ref="myButton">My button</button>
+            <button @click="updateFromOne">From One</button>
+        </div>
+        <hr>
+        <div id="app2">
+            <h3>{{ name }}</h3>
+            <button @click="updateFromTwo">From two</button>
+        </div>
+        <script>
+
+            var data = {
+                name: 'one'
+            };
+
+           var vm1 = new Vue({
+            data: data,
+            methods: {
+                updateFromOne: function() {
+                    vm2.name = 'update from one';
+                }
+            },
+            mounted() {
+                console.log('mounted');
+                console.log(this.$el);
+            },
+            beforeMount: function() {
+                console.log('before mount');
+                console.log(this.$el);
+            },
+            created() {
+                console.log('created');
+                console.log(this.$el);
+            },
+            beforeCreate: function() {
+                console.log('before create');
+                console.log(this.name);
+            }
+           });
+
+           vm1.$mount('#app1')
+
+           console.log(vm1.$data === data);
+
+           vm1.$refs.myButton.innerText = 'test';
+
+           setTimeout(function() {
+               vm1.name = 'one updated from vanilla js';
+               vm2.name= 'two update from vanilla js';
+           }, 3000);
+
+           var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                name: 'two'
+            },
+            methods: {
+                updateFromTwo: function() {
+                    vm1.name = 'update from two';
+                }
+            }
+           });
+        </script>
+    </body>
+</html>
