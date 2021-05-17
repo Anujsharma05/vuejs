@@ -1,14 +1,17 @@
 <template>
+  <the-header></the-header>
   <todo-list></todo-list>
 </template>
 
 <script>
 
 import TodoList from './components/task-list/TodoList'
+import TheHeader from './components/TheHeader'
 
 export default {
   components: {
-    TodoList
+    TodoList,
+    TheHeader
   },
 };
 </script>

@@ -1,10 +1,15 @@
 <template>
   <div>
+    <div class="tasks-count">
+      <span>Completed Tasks: {{ completedTaskCount }}</span>
+      <span>Pending Tasks: {{ pendingTasks }}</span>
+    </div>
     <ul>
       <todo-item
         v-for="(item, index) in itemList"
         :key="index"
         :item="item"
+        :taskCount="getTaskCount"
         @project-value="updateProject($event, index)"
         @title-value="updateTitle($event, index)"
       >
@@ -58,7 +63,8 @@ export default {
       item: {
         title: '',
         project: ''
-      }
+      },
+      completedTaskCount: 0
     };
   },
   methods: {
@@ -97,12 +103,27 @@ export default {
         title: '',
         project: ''
       }
+    },
+    getTaskCount: function() {
+      this.completedTaskCount++;
     }
   },
+  computed: {
+    pendingTasks: function() {
+      return this.itemList.length - this.completedTaskCount;
+    }
+  }
 };
 </script>
 
-<style>
+<style scoped>
+
+.tasks-count span {
+  display: block;
+  text-align: center;
+  margin: 0.7rem;
+}
+
 ul {
   display: flex;
   flex-direction: column;

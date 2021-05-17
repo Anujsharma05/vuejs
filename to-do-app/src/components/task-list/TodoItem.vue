@@ -41,6 +41,9 @@ export default {
     item: {
       type: Object,
     },
+    taskCount: {
+      type: Function
+    }
   },
   data: function() {
     return {
@@ -62,8 +65,11 @@ export default {
       this.$emit("title-value", value);
     },
     completeTask: function() {
-      this.taskStatus = 'Completed';
-      this.isCompleted = true;
+      if(this.taskStatus == 'Pending') {
+        this.taskStatus = 'Completed';
+        this.isCompleted = true;
+        this.taskCount();
+      }
     }
   },
 };
