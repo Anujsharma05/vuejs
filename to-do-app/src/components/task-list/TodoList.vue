@@ -2,16 +2,15 @@
   <div>
     <div class="tasks-count">
       <span>Completed Tasks: {{ completedTaskCount }}</span>
-      <span>Pending Tasks: {{ pendingTasks }}</span>
+      <span>Pending Tasks: {{ itemList.length - completedTaskCount }}</span>
     </div>
     <ul>
       <todo-item
         v-for="(item, index) in itemList"
         :key="index"
         :item="item"
-        :taskCount="getTaskCount"
-        @project-value="updateProject($event, index)"
-        @title-value="updateTitle($event, index)"
+        @task-completed="taskCompleted(index)"
+        @update-item="updateItem($event, index)"
       >
         <template v-slot:deleteButton>
           <button @click="deleteItem(index)">Delete</button>
@@ -22,15 +21,10 @@
     <section class="form-container" v-if="newItem">
       <base-form
         :isNewItem="true"
-        @project-value="createItemProject"
-        @title-value="createItemTitle"
+        :checkNewItem="checkNewItem"
+        @add-new-item="createNewItem"
       >
-        <template class="form-buttons">
-          <base-button @click="addNewItem">Create</base-button>
-          <base-button :style-danger="true" @click="cancelItem"
-            >Cancel</base-button
-          >
-        </template>
+        
       </base-form>
     </section>
 
@@ -63,71 +57,50 @@ export default {
         {
           title: "Todo A",
           project: "Project A",
+          isCompleted: false
         },
         {
           title: "Todo B",
           project: "Project B",
+          isCompleted: false
         },
       ],
       newItem: false,
-      item: {
-        title: '',
-        project: ''
-      },
-      completedTaskCount: 0,
       openSuccessModal: false
     };
   },
   methods: {
-    updateProject: function(value, index) {
-      this.itemList[index].project = value;
-    },
-    updateTitle: function(value, index) {
-      this.itemList[index].title = value;
+    updateItem: function(item, index) {
+      this.itemList[index].title = item.title;
+      this.itemList[index].project = item.project;
     },
     deleteItem: function(index) {
       this.itemList.splice(index, 1);
     },
-    createItemProject: function(value) {
-      if(value != '') {
-        this.item.project = value;
-      }
-    },
-    createItemTitle: function(value) {
-      if(value != '') {
-        this.item.title = value;
-      }
-    },
-    addNewItem: function() {
-      this.itemList.push(this.item);
-
-      this.item = {
-        title: '',
-        project: ''
-      }
-
+    createNewItem: function(item) {
+      this.itemList.push(item);
       this.newItem = false;
     },
-    cancelItem: function() {
-      this.newItem = false;
-      this.item = {
-        title: '',
-        project: ''
-      }
+    checkNewItem: function(value) {
+      this.newItem = value;
     },
-    getTaskCount: function() {
-      this.completedTaskCount++;
-      this.openSuccessModal = true;
-
+    taskCompleted: function(index) {
+      this.itemList[index].isCompleted = true;
     }
   },
   computed: {
-    pendingTasks: function() {
-      if(this.itemList.length != 0) {
-        return this.itemList.length - this.completedTaskCount;
-      } else {
-         return 0;
-      }
+    completedTaskCount: function() {
+      
+      let count = 0;
+      if(this.itemList.length > 0) {
+        this.itemList.forEach(item => {
+          if(item.isCompleted==true) {
+            count++;
+          }
+        });
+      } 
+      
+      return count;
     }
   }
 };

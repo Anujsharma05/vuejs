@@ -2,14 +2,11 @@
   <li class="to-do-item">
     <base-form
       v-if="inEditMode"
-      :item="item"
       :isNewItem="isNewItem"
-      @project-value="updateProject"
-      @title-value="updateTitle"
+      :item="item"
+      :checkEditMode="checkEditMode"
+      @update-item="updateItem"
     >
-      <template class="form-buttons">
-        <base-button @click="inEditMode = false">Close X</base-button>
-      </template>
     </base-form>
 
     <section v-else class="show-item">
@@ -18,10 +15,10 @@
 
       <div class="action-buttons">
         <slot name="deleteButton"></slot>
-        <button @click="setEditMode" v-if="!isCompleted">Edit</button>
+        <button @click="setEditMode" v-if="!item.isCompleted">Edit</button>
       </div>
     </section>
-    <div class="status-button">
+    <div class="status-button" v-if="!inEditMode">
       <base-button :taskStatus="taskStatus" @click="completeTask">{{ taskStatus }}</base-button>
     </div>
   </li>
@@ -30,26 +27,22 @@
 <script>
 export default {
   emits: {
-    "project-value": {
-      type: String,
+    "update-item": {
+      type: Object,
     },
-    "title-value": {
-      type: String,
-    },
+    "task-completed": {
+      type: Object
+    }
   },
   props: {
     item: {
       type: Object,
-    },
-    taskCount: {
-      type: Function
     }
   },
   data: function() {
     return {
       inEditMode: false,
       isNewItem: false,
-      isCompleted: false,
       taskStatus: 'Pending'
     };
   },
@@ -58,20 +51,20 @@ export default {
       this.inEditMode = true;
       this.isNewItem = false;
     },
-    updateProject: function(value) {
-      this.$emit("project-value", value);
-    },
-    updateTitle: function(value) {
-      this.$emit("title-value", value);
-    },
     completeTask: function() {
       if(this.taskStatus == 'Pending') {
         this.taskStatus = 'Completed';
-        this.isCompleted = true;
-        this.taskCount();
+        
+        this.$emit("task-completed");
       }
+    },
+    updateItem: function(item) {
+      this.$emit("update-item", item);
+    },
+    checkEditMode: function(value) {
+      this.inEditMode = value;
     }
-  },
+  }
 };
 </script>
 
@@ -85,14 +78,6 @@ export default {
   border-radius: 0.5rem;
   position: relative;
   overflow: hidden;
-}
-
-.form-buttons {
-  display: flex;
-}
-
-.form-buttons > * {
-  width: 100%;
 }
 
 .show-item span {
@@ -128,7 +113,9 @@ export default {
   margin-bottom: 40px;
 }
 
-
+.action-buttons > * {
+  margin: 0.2rem;
+}
 
 @media (max-width: 350px) {
   .to-do-item {

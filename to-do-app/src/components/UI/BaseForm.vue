@@ -1,23 +1,34 @@
 <template>
-  <form :class="{'form-new': isNewItem}">
+  <form :class="{ 'form-new': isNewItem }">
     <div class="form-control">
-      <label for="title" :class="{'align-center': isNewItem}">Title</label>
-      <input type="text" id="title" v-model="title" @change="emitTitleValue" :class="{'border-red': isEmptyTitle}" />
-    </div>
-
-    <div class="form-control">
-      <label for="project" :class="{'align-center': isNewItem}">Project</label>
+      <label for="title" :class="{ 'align-center': isNewItem }">Title</label>
       <input
         type="text"
-        id="project"
-        v-model="project"
-        @change="emitProjectValue"
-        :class="{'border-red': isEmptyProject}"
+        id="title"
+        v-model="title"
+        :class="{'border-red': isTitleEmpty}"
+        @blur="checkTitleEmpty"
       />
     </div>
 
     <div class="form-control">
-      <slot></slot>
+      <label for="project" :class="{ 'align-center': isNewItem }"
+        >Project</label
+      >
+      <input
+        type="text"
+        id="project"
+        v-model="project"
+      />
+    </div>
+    <div class="form-buttons" v-if="isNewItem">
+      <base-button @click="addNewItem">Create</base-button>
+      <base-button :style-danger="true" @click="checkNewItem(false)">Cancel</base-button>
+    </div>
+    <div class="form-control" v-else>
+      <div class="form-buttons">
+        <base-button @click="updateExistingItem">Update</base-button>
+      </div>
     </div>
   </form>
 </template>
@@ -25,57 +36,94 @@
 <script>
 export default {
   emits: {
-    "title-value": {
-      type: String,
+    "add-new-item": {
+      type: Object,
     },
-    "project-value": {
-      type: String,
+    "update-item": {
+      type: Object,
     },
   },
   props: {
-    item: {
-      type: Object,
-    },
     isNewItem: {
       type: Boolean,
-      required: false
+      required: true,
     },
+    item: {
+      type: Object
+    },
+    checkEditMode: {
+      type: Function
+    },
+    checkNewItem:{
+      type: Function
+    }
   },
-  data: function() {
+  data: function () {
     return {
       title: "",
-      project: ""
+      project: "",
+      isTitleEmpty: false
     };
   },
   mounted() {
-    if(!this.isNewItem) {
-       this.title = this.item.title;
+    if (!this.isNewItem) {
+      this.title = this.item.title;
       this.project = this.item.project;
     }
   },
   methods: {
-    emitTitleValue: function(event) {
-      console.log(event);
-      let title = event.target.value;
-      if (title != "") {
-        this.$emit("title-value", title);
+    checkTitleEmpty() {
+      if(this.title.trim() == '') {
+        this.isTitleEmpty = true;
+      } else {
+        this.isTitleEmpty = false;
       }
     },
-    emitProjectValue: function(event) {
-      let project = event.target.value;
-      if (project != "") {
-        this.$emit("project-value", project);
+    verifyItem: function () {
+      if (this.title.trim() == "") {
+        this.isTitleEmpty = true;
+        return null;
+      }
+
+      let newItem = {
+        title: this.title,
+        project: this.project,
+        isCompleted: false,
+      };
+
+      return newItem;
+    },
+    addNewItem: function () {
+      let newItem = this.verifyItem();
+      if(newItem != null) {
+        this.$emit("add-new-item", newItem);
       }
     },
+    updateExistingItem: function() {
+      let item = this.verifyItem();
+
+      if(item != null) {
+        this.checkEditMode(false);
+        this.$emit("update-item", item);
+      } else {
+        this.checkEditMode(true);
+      }
+    },
+    cancelItem: function() {
+      console.log('a')
+    }
   },
   computed: {
-    isEmptyTitle: function() {
-      return this.title.trim() == '' ? true : false;
-    },
-    isEmptyProject: function() {
-      return this.project.trim() == '' ? true : false;
-    }
-  }
+    checkTitle: function() {
+      if(this.isTitleEmpty) {
+        return {
+
+        };
+      }
+
+      return null;
+    } 
+  },
 };
 </script>
 
@@ -103,11 +151,25 @@ input {
   border-radius: 0.5rem;
 }
 
+.form-buttons {
+  display: flex;
+}
+
+.form-buttons > * {
+  width: 100%;
+}
+
 .align-center {
   text-align: center;
 }
 
-.border-red {
+.border-red{
   border: 1px solid red;
+  border-radius: 0.5rem;
+}
+
+.border-red:focus {
+  border: none;
+  
 }
 </style>
