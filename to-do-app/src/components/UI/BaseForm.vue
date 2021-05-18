@@ -2,7 +2,7 @@
   <form :class="{'form-new': isNewItem}">
     <div class="form-control">
       <label for="title" :class="{'align-center': isNewItem}">Title</label>
-      <input type="text" id="title" v-model="title" @change="emitTitleValue" />
+      <input type="text" id="title" v-model="title" @change="emitTitleValue" :class="{'border-red': isEmptyTitle}" />
     </div>
 
     <div class="form-control">
@@ -12,6 +12,7 @@
         id="project"
         v-model="project"
         @change="emitProjectValue"
+        :class="{'border-red': isEmptyProject}"
       />
     </div>
 
@@ -43,7 +44,7 @@ export default {
   data: function() {
     return {
       title: "",
-      project: "",
+      project: ""
     };
   },
   mounted() {
@@ -54,6 +55,7 @@ export default {
   },
   methods: {
     emitTitleValue: function(event) {
+      console.log(event);
       let title = event.target.value;
       if (title != "") {
         this.$emit("title-value", title);
@@ -66,6 +68,14 @@ export default {
       }
     },
   },
+  computed: {
+    isEmptyTitle: function() {
+      return this.title.trim() == '' ? true : false;
+    },
+    isEmptyProject: function() {
+      return this.project.trim() == '' ? true : false;
+    }
+  }
 };
 </script>
 
@@ -95,5 +105,9 @@ input {
 
 .align-center {
   text-align: center;
+}
+
+.border-red {
+  border: 1px solid red;
 }
 </style>

@@ -128,6 +128,8 @@ export default {
   margin-bottom: 40px;
 }
 
+
+
 @media (max-width: 350px) {
   .to-do-item {
     width: 260px;

@@ -26,7 +26,7 @@
         @title-value="createItemTitle"
       >
         <template class="form-buttons">
-          <base-button :disabled="!(item.title && item.project)" @click="addNewItem">Create</base-button>
+          <base-button @click="addNewItem">Create</base-button>
           <base-button :style-danger="true" @click="cancelItem"
             >Cancel</base-button
           >
@@ -37,6 +37,16 @@
     <div class="add-item" v-if="!newItem">
       <span @click="newItem = true">+</span>
     </div>
+    <teleport to="body">
+       <section v-if="openSuccessModal">
+      <div class="backdrop" ></div>
+      <div class="modal">
+        <h1>SUCCESS!</h1>
+        <p>Task Completed!</p>
+        <base-button class="ok-button" @click="openSuccessModal = false">OK</base-button>
+      </div>
+    </section>
+    </teleport>
   </div>
 </template>
 
@@ -64,7 +74,8 @@ export default {
         title: '',
         project: ''
       },
-      completedTaskCount: 0
+      completedTaskCount: 0,
+      openSuccessModal: false
     };
   },
   methods: {
@@ -106,11 +117,17 @@ export default {
     },
     getTaskCount: function() {
       this.completedTaskCount++;
+      this.openSuccessModal = true;
+
     }
   },
   computed: {
     pendingTasks: function() {
-      return this.itemList.length - this.completedTaskCount;
+      if(this.itemList.length != 0) {
+        return this.itemList.length - this.completedTaskCount;
+      } else {
+         return 0;
+      }
     }
   }
 };
@@ -166,5 +183,40 @@ ul {
 .form-container {
   display: flex;
   justify-content: center;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  background: white;
+  width: 40%;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  transform: translate(-50%, -50%);
+
+}
+
+.modal > * {
+  margin: 0;
+}
+
+.modal .ok-button {
+  padding: 0.5rem 1.5rem;
 }
 </style>
