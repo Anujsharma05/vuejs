@@ -1,8 +1,5 @@
-node_modules
-node_modules.zip
-HOW-TO-USE.pdf
-
 .DS_Store
+node_modules
 /dist
 
 
@@ -24,6 +21,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-*code-workspace
-*.tar.gz

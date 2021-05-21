@@ -1,0 +1,174 @@
+{
+    "cat": [
+        {
+            "id": 1,
+            "title": "Calico Cat",
+            "url": "/public/images/cat1.jpg",
+            "price": 19.95
+        },
+        {
+            "id": 2,
+            "title": "Cat Close Up",
+            "url": "/public/images/cat2.jpg",
+            "price": 23.95
+        },
+        {
+            "id": 3,
+            "title": "Grey Kitten",
+            "url": "/public/images/cat3.jpg",
+            "price": 17.95
+        },
+        {
+            "id": 4,
+            "title": "Cat Outdoors",
+            "url": "/public/images/cat4.jpg",
+            "price": 17.95
+        },
+        {
+            "id": 5,
+            "title": "Sneaky Cat",
+            "url": "/public/images/cat5.jpg",
+            "price": 19.95
+        },
+        {
+            "id": 6,
+            "title": "Fluffy Cat",
+            "url": "/public/images/cat6.jpg",
+            "price": 23.95
+        },
+        {
+            "id": 7,
+            "title": "Blue-Eyed Cat",
+            "url": "/public/images/cat7.jpg",
+            "price": 19.95
+        },
+        {
+            "id": 8,
+            "title": "White Cat",
+            "url": "/public/images/cat8.jpg",
+            "price": 23.95
+        },
+        {
+            "id": 9,
+            "title": "Orange Cat",
+            "url": "/public/images/cat9.jpg",
+            "price": 19.95
+        },
+        {
+            "id": 10,
+            "title": "Cat Pile",
+            "url": "/public/images/cat10.jpg",
+            "price": 27.95
+        },
+        {
+            "id": 11,
+            "title": "Black Cat",
+            "url": "/public/images/cat11.jpg",
+            "price": 27.95
+        }
+    ],
+    "dog": 
+
+    [
+       {
+          "id": 12,
+          "title": "Rottweiler",
+          "url": "/public/images/dog1.jpg",
+          "price": 18.95
+       },
+       {
+          "id": 13,
+          "title": "Grey dog",
+          "url": "/public/images/dog2.jpg",
+          "price": 23.95
+       },
+       {
+          "id": 14,
+          "title": "Dog on grass",
+          "url": "/public/images/dog3.jpg",
+          "price": 23.95
+       },
+       {
+          "id": 15,
+          "title": "Sad puppy",
+          "url": "/public/images/dog4.jpg",
+          "price": 23.95
+       },
+       {
+          "id": 16,
+          "title": "Boxer",
+          "url": "/public/images/dog5.jpg",
+          "price": 22.95
+       },
+       {
+          "id": 17,
+          "title": "Looking sideways",
+          "url": "/public/images/dog6.jpg",
+          "price": 19.95
+       },
+       {
+          "id": 18,
+          "title": "German shepard",
+          "url": "/public/images/dog7.jpg",
+          "price": 19.95
+       },
+       {
+          "id": 19,
+          "title": "Sleepy dog",
+          "url": "/public/images/dog8.jpg",
+          "price": 18.95
+       },
+       {
+          "id": 20,
+          "title": "Happy dog",
+          "url": "/public/images/dog9.jpg",
+          "price": 23.95
+       }
+    ],
+    "flower": 
+
+    [
+       {
+          "id": 21,
+          "title": "Pink Lily",
+          "url": "/public/images/flower1.jpg",
+          "price": 23.95
+       },
+       {
+          "id": 22,
+          "title": "Orchid",
+          "url": "/public/images/flower2.jpg",
+          "price": 24.95
+       },
+       {
+          "id": 23,
+          "title": "Dandelion",
+          "url": "/public/images/flower3.jpg",
+          "price": 15.95
+       },
+       {
+          "id": 24,
+          "title": "Orange flower",
+          "url": "/public/images/flower4.jpg",
+          "price": 24.95
+       },
+       {
+          "id": 25,
+          "title": "Water lily",
+          "url": "/public/images/flower5.jpg",
+          "price": 17.95
+       },
+       {
+          "id": 25,
+          "title": "Red tulip",
+          "url": "/public/images/flower6.jpg",
+          "price": 18.95
+       },
+       {
+          "id": 26,
+          "title": "Red poppy",
+          "url": "/public/images/flower7.jpg",
+          "price": 22.95
+       }
+    ]
+}
