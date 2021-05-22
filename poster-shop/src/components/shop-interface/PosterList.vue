@@ -2,18 +2,28 @@
   <section>
     <p>Found {{ resultLength }} results for search term cat.</p>
 
-  <ul class="poster-grid">
-    <poster-item v-for="item in result" :key="item.id" :item="item"></poster-item>
-  </ul>
+    <ul class="poster-grid">
+      <poster-item
+        v-for="item in result"
+        :key="item.id"
+        :item="item"
+        @add-item="addToCart"
+      ></poster-item>
+    </ul>
   </section>
 </template>
 
 <script>
-import PosterItem from './PosterItem'
+import PosterItem from "./PosterItem";
 
 export default {
   components: {
-    PosterItem
+    PosterItem,
+  },
+  emits: {
+    'add-item': {
+      type: Object
+    }
   },
   props: {
     searchTerm: {
@@ -55,6 +65,9 @@ export default {
           console.log(error.message);
         });
     },
+    addToCart: function(item) {
+      this.$emit('add-item', item);
+    }
   },
   created() {
     this.fetchPosterData();
@@ -64,9 +77,18 @@ export default {
 
 <style scoped>
 
+section {
+  /* margin: 2rem 0 0 4rem; */
+}
+
+section > p {
+  margin: 0 0 2rem 0;
+}
+
 .poster-grid {
   display: grid;
   gap: 2rem;
+  padding: 0;
+  list-style: none;
 }
-
 </style>

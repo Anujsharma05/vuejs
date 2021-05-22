@@ -27,6 +27,11 @@ export default {
 </script>
 
 <style>
+:root {
+  --main-color: #007f74;
+  --secondary-color: #4bccc1;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -34,5 +39,16 @@ export default {
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+button {
+  color: white;
+  background-color: var(--main-color);
+  border: none;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: var(--secondary-color);
 }
 </style>
