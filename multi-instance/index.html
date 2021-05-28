@@ -2,7 +2,10 @@
 <html>
     <head>
 		<title>multi-instance</title>
-		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <meta charset="UTF-8">
+		
+        <script src="https://unpkg.com/vue@next"></script>
+
 	</head>
     <body>
         <div id="app1">
@@ -16,13 +19,12 @@
             <button @click="updateFromTwo">From two</button>
         </div>
         <script>
-
-            var data = {
-                name: 'one'
-            };
-
-           var vm1 = new Vue({
-            data: data,
+           var vm1 = Vue.createApp({
+            data() {
+                return {
+                    name: 'one'
+                }
+            },
             methods: {
                 updateFromOne: function() {
                     vm2.name = 'update from one';
@@ -46,21 +48,18 @@
             }
            });
 
-           vm1.$mount('#app1')
-
-           console.log(vm1.$data === data);
-
-           vm1.$refs.myButton.innerText = 'test';
+           vm1.mount('#app1')
 
            setTimeout(function() {
                vm1.name = 'one updated from vanilla js';
                vm2.name= 'two update from vanilla js';
            }, 3000);
 
-           var vm2 = new Vue({
-            el: '#app2',
-            data: {
-                name: 'two'
+           var vm2 = Vue.createApp({
+            data: function(){
+                return {
+                name: 'two' 
+            }
             },
             methods: {
                 updateFromTwo: function() {
@@ -68,6 +67,8 @@
                 }
             }
            });
+
+           vm2.mount('#app2');
         </script>
     </body>
 </html>
