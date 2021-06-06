@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.container {
+    /* display: grid;
+    justify-items: center; */
+    width: max-content;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    position: relative;
+}
+
+h1::before,
+h1::after {
+    content: '';
+    background: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom:0;
+    right: 0;
+}
+
+h1::before {
+    animation: typewriter 6s 500ms steps(22) forwards;
+}
+
+h1::after {
+    background: black;
+    width: 0.125rem;
+    animation: typewriter 6s 500ms steps(22) forwards, blink 700ms infinite forwards, wiggle 500ms 7s forwards;
+}
+
+p {
+    opacity: 0;
+    transform: translateY(3rem);
+    animation: fadeInUp 700ms 7s forwards;
+}
+
+@keyframes typewriter {
+    to {
+        left: 100%;
+    }
+}
+
+@keyframes blink {
+    to {
+        background: transparent;
+    }
+}
+
+@keyframes wiggle {
+    to {
+        display: none;
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        transform: translateY(0);
+    opacity: 1;
+    }
+}

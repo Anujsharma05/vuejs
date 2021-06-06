@@ -64,8 +64,8 @@
     </div>
     </template>
     <template v-else>
-      <app-custom v-model="dataSwitch"></app-custom>
-      {{dataSwitch}}
+      <app-custom :modelValue="dataSwitch" @update:modelValue="xyz"></app-custom>
+      
     </template>
   </div>
 </template>
@@ -94,7 +94,7 @@ export default {
       name: '',
       password: '',
       switchPage: false,
-      dataSwitch: ''
+      dataSwitch: 9000,
     }
   },
   watch: {
@@ -111,6 +111,10 @@ export default {
     submitted: function() {
       //  TODO: this is important
       console.log(this.name + ' ' + this.password);
+    },
+    xyz(value) {
+      console.log('inside xyz');
+      console.log(value);
     }
   }
   
