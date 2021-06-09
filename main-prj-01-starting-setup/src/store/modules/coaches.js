@@ -2,6 +2,7 @@ export default {
   namespaced: true,
   state() {
     return {
+      lastFetch: null,
       coaches: [
         {
           id: 'c1',
@@ -30,6 +31,9 @@ export default {
     },
     setCoaches(state, payLoad) {
       state.coaches = payLoad;
+    },
+    updateLastFetch(state) {
+      state.lastFetch = new Date().getTime();
     }
   },
   actions: {
@@ -62,13 +66,19 @@ export default {
       });
     },
 
-    async loadCoaches(context) {
+    async loadCoaches(context, forcedRefresh) {
+      const shouldUpdate = context.getters.shouldUpdate;
+      if(!shouldUpdate && !forcedRefresh) {
+        return;
+      }
+
       const response = await fetch('https://find-coach-cf434-default-rtdb.firebaseio.com/coaches.json');
 
       const responseData = await response.json();
 
       if(!response.ok) {
-        //error
+        const error = new Error(responseData.message || 'failed to fetch data');
+        throw error;
       }
 
       const coaches = [];
@@ -80,13 +90,14 @@ export default {
           lastName: responseData[key].lastName,
           areas: responseData[key].areas,
           description: responseData[key].desc,
-          hourlyRate: responseData[key].rate
+          hourlyRate: responseData[key].hourlyRate
         }
 
         coaches.push(coach);
       }
 
       context.commit('setCoaches', coaches);
+      context.commit('updateLastFetch');
     }
   },
   getters: {
@@ -101,6 +112,17 @@ export default {
       const userId = rootGetters.userId;
 
       return coaches.some(coach => coach.id === userId);
+    },
+    shouldUpdate(state) {
+      const lastFetch = state.lastFetch;
+
+      if(!lastFetch) {
+        return true;
+      }
+
+      const currentTime = new Date().getTime();
+
+      return (currentTime - lastFetch)/1000 > 60;
     }
   }
 }
