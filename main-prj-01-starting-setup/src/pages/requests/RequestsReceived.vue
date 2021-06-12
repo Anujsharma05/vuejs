@@ -50,7 +50,7 @@ export default {
       } catch(error) {
         this.error = error.message || 'something went wrong';
       }
-      // this.isLoading = false;
+      this.isLoading = false;
     },
     handleError() {
       this.error = null;
