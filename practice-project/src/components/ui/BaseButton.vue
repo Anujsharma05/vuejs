@@ -1,8 +1,8 @@
 <template>
-  <button :class="mode" v-if="!link">
+  <button :class="'btn-'+mode" v-if="!link">
     <slot></slot>
   </button>
-  <router-link :to="to" :class="mode" v-else>
+  <router-link :to="to" :class="'link-'+mode" v-else>
     <slot></slot>
   </router-link>
 </template>
@@ -35,15 +35,14 @@ a {
   display: inline-block;
   padding: 1rem 2rem;
   margin: 0 1rem;
-  font-size: 1.3rem;
 }
 
-.outline {
+.link-outline {
   border-radius: 10px;
   margin: 0 1rem;
 }
 
-.outline:hover {
+.link-outline:hover {
   outline: 2px solid var(--clr-text);
 }
 

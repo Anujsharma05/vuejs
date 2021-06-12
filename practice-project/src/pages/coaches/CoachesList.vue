@@ -4,7 +4,10 @@
   </section>
   <section>
     <base-card>
-      <div class="actions"></div>
+      <div class="actions">
+        <base-button mode="outline">Refresh</base-button>
+        <base-button mode="flat" link to="/register">Register as Coach</base-button>
+      </div>
 
       <ul>
         <li v-for="n in 3" :key="n">{{ n }}</li>

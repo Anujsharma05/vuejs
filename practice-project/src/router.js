@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import CoachesList from './pages/coaches/CoachesList.vue';
 import CoachDetail from './pages/coaches/CoachDetail.vue';
+import CoachRegistration from './pages/coaches/CoachRegistration.vue';
 import RequestsList from './pages/requests/RequestsList.vue';
 
 const router = createRouter({
@@ -19,6 +20,10 @@ const router = createRouter({
             path: '/coaches/:id',
             component: CoachDetail,
             props: true
+        },
+        {
+            path: '/register',
+            component: CoachRegistration
         },
         {
             path: '/requests',

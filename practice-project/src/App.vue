@@ -18,7 +18,7 @@ export default {
 
 :root {
   --clr-primary: #3abeaa;
-  --clr-secondary: #ffa17a;
+  --clr-secondary: #008876;
   --clr-text: #00372a;
 }
 
@@ -29,5 +29,6 @@ export default {
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  color: var(--clr-text);
 }
 </style>
