@@ -59,6 +59,7 @@
 
 <script>
 export default {
+    emits: ['form-data'],
     data() {
         return {
             formIsValid: true,
@@ -112,6 +113,15 @@ export default {
     },
     submitForm() {
         this.validateForm();
+        const coach = {
+            firstname: this.firstname.val,
+            lastname: this.lastname.val,
+            rate: this.rate.val,
+            desc: this.description.val,
+            areas: this.areas.val
+        };
+
+        this.$emit('form-data', coach);
     },
     checkValidity(input) {
         if((input==='firstname' || input==='lastname' || input==='description') && this[input].val==='') {

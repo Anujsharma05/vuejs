@@ -17,7 +17,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 :root {
-  --clr-primary: #3abeaa;
+  --clr-primary: cadetblue;
   --clr-secondary: #008876;
   --clr-text: #00372a;
 }
