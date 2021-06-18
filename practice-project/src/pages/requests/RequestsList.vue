@@ -1,33 +1,32 @@
 <template>
-    <div>hello world</div>
-    <label for="name">Name</label>
-    <input type="text" id="name" />
+    <section>
+        <ul>
+            <request-item v-for="(req,index) in requests" :key="index" :email="req.email" :message="req.message" ></request-item>
+        </ul>
+    </section>
 </template>
 
+<script>
+import RequestItem from '../../components/requests/RequestItem.vue';
+
+export default {
+    components: {
+        RequestItem
+    },
+    computed: {
+        requests() {
+            return this.$store.getters['requests/requests'];
+        }
+    },
+    created() {
+        this.$store.dispatch('requests/fetchRequests');
+    }
+}
+</script>
+
 <style scoped>
-div {
-    display: inline-block;
-    margin: 3rem;
-}
-div::before {
-    content: "";
-    display: block;
-    height: 5px;
-    background-color: red;
-}
-
-label {
-    display: block;
-}
-
-label::after {
-    content: "Name is not valid";
-    height: 5px;
-    color: red;
-    text-align: right;
-}
-
-input {
-    width: 100%;
+ul {
+    list-style: none;
+    padding: 0;
 }
 </style>

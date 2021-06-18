@@ -2,7 +2,8 @@ export default {
     namespaced: true,
     state() {
         return {
-            coaches: []
+            coaches: [],
+            lastFetchedTime: null
         }
     },
     mutations: {
@@ -11,6 +12,7 @@ export default {
         },
         updateCoaches(state, payload) {
             state.coaches = payload;
+            state.lastFetchedTime = new Date().getTime();
         }
     },
     actions: {
@@ -32,15 +34,23 @@ export default {
                 id: coachId
             });
         },
-        async fetchCoaches(context) {
-            const response = await fetch(`https://find-coach-cf434-default-rtdb.firebaseio.com/coaches.json`);
+        async fetchCoaches(context, forceFetch) {
 
+            const allowFetching = context.getters.allowFetching;
+
+            if(!allowFetching && !forceFetch) {
+                return;
+            }
+
+            const response = await fetch(`https://find-coach-cf434-default-rtdb.firebaseio.com/coaches.json`);
+          
             if(!response.ok) {
-                //error
+                const error = new Error('Unable to fetch coaches. Please try again later');
+                throw error;
             }
 
             const responseData = await response.json();
-
+        
             const coaches = [];
 
             for(const key in responseData) {
@@ -61,6 +71,16 @@ export default {
     getters: {
         coaches(state) {
             return state.coaches;
+        },
+        allowFetching(state) {
+            const lastFetch = state.lastFetchedTime;
+            if(!lastFetch) {
+                return true;
+            }
+
+            const currentTime = new Date().getTime();
+
+            return (currentTime - lastFetch)/1000 > 60;
         }
     }
 }

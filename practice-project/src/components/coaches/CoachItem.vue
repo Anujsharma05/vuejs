@@ -5,18 +5,26 @@
       <section class="badge-section">
           <base-badge v-for="area in areas" :key="area" :area="area"></base-badge>
       </section>
+      <section class="actions">
+        <base-button link :to="contactLink" mode="flat">Contact</base-button>
+        <base-button link :to="detailsLink" mode="flat">View Details</base-button>
+      </section>
   </li>
 </template>
 
 <script>
-import BaseBadge from '../ui/BaseBadge.vue';
 export default {
-  components: { BaseBadge },
-  props: ["firstname", "lastname", "rate", "areas"],
+  props: ["id", "firstname", "lastname", "rate", "areas"],
   computed: {
     fullName() {
       return this.firstname + " " + this.lastname;
     },
+    contactLink() {
+      return this.$route.path + '/' + this.id + '/contact';
+    },
+    detailsLink() {
+      return this.$route.path + '/' + this.id;
+    }
   },
 };
 </script>
