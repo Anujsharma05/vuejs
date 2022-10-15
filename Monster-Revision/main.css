@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 3em 6em;
+}
+
+body > div > section {
+    margin: 2rem;
+}
+
+.scores {
+    white-space: nowrap;
+}
+
+.scores > div {
+    display: inline-block;
+    width: 50%;
+    padding: 0 5em;
+    white-space: normal;
+}
+
+.scores h1{
+    text-align: center;
+}
+
+.health-bar {
+    height: 50px;
+    background-color: #a9a9a9;
+    position: relative;
+}
+
+.health-bar > h2 {
+    position: absolute;
+    right: 5px;
+    margin: 0;
+    line-height: 2;
+    vertical-align: middle;
+}
+
+.active-health {
+    height: 100%;
+    background-color: #008000;
+}
+
+.controls, .logs{
+    padding: 1rem;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 1px 1px #eee;
+    text-align: center;
+}
+
+.actions > div, .start-button {
+    display: inline-block;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.start-button {
+    font-size: 1.5rem;
+    background-color: rebeccapurple;
+}
+
+.actions > div:nth-of-type(1) {
+    background-color: mediumorchid;
+}
+
+.actions > div:nth-of-type(2) {
+    background-color: fuchsia;
+}
+
+.actions > div:nth-of-type(3) {
+    background-color: aqua;
+}
+
+.actions > div:nth-of-type(4) {
+    background-color: greenyellow;
+}
+
+.logs ul {
+    list-style: none;
+    padding: 0 1rem;
+}
+
+.logs li {
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+
+.logs li:nth-child(even) {
+    background-color: #add8e6;
+}
+
+.logs li:nth-child(odd) {
+    background-color: #af2566;
+}
+
+.logs p {
+    margin: 0;
+    font-weight: bold;
+}

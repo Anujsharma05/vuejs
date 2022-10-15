@@ -57,6 +57,9 @@ export default {
     getters: {
         requests(state) {
             return state.requests;
+        },
+        hasRequests(_, otherGetters) {
+            return otherGetters.requests.length > 0;
         }
     }
 }

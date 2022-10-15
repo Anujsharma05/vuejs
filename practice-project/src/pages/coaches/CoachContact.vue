@@ -34,6 +34,7 @@ export default {
       }
 
       this.$store.dispatch('requests/addRequest', request);
+      this.$router.replace('/coaches');
     },
   },
 };

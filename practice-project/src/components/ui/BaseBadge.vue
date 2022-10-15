@@ -25,6 +25,7 @@ div {
     display: inline-block;
     padding: 1rem;
     border-radius: 5px;
+    font-weight: bold;
 }
 
 .badge-frontend {
@@ -32,7 +33,7 @@ div {
 }
 
 .badge-backend {
-    background-color: cadetblue;
+    background-color: #00a87b;
 }
 
 .badge-career {

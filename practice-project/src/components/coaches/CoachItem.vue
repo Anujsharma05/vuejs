@@ -49,4 +49,9 @@ h2 {
     gap: 1rem;
     flex-wrap: wrap;
 }
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
 </style>

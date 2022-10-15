@@ -1,0 +1,91 @@
+{
+  "pageViews": [
+    {
+      "date": "Jan2019",
+      "views": 39101
+    },
+    {
+      "date": "Feb2019",
+      "views": 42983
+    },
+    {
+      "date": "Mar2019",
+      "views": 58741
+    },
+    {
+      "date": "Apr2019",
+      "views": 48071
+    },
+    {
+      "date": "May2019",
+      "views": 46391
+    },
+    {
+      "date": "Jun2019",
+      "views": 62001
+    },
+    {
+      "date": "Jul2019",
+      "views": 61829
+    },
+    {
+      "date": "Aug2019",
+      "views": 22412
+    },
+    {
+      "date": "Sep2019",
+      "views": 78547
+    },
+    {
+      "date": "Oct2019",
+      "views": 72190
+    },
+    {
+      "date": "Nov2019",
+      "views": 53291
+    },
+    {
+      "date": "Dec2019",
+      "views": 69341
+    }
+  ],
+  "pageViewsByCategory": {
+    "vue": 51290,
+    "javascript": 89125,
+    "movies": 10892,
+    "music": 7901,
+    "cats": 49901
+  },
+  "newVsReturning": [
+    {
+      "date": "Jul2019",
+      "new": 1543,
+      "old": 581
+    },
+    {
+      "date": "Aug2019",
+      "new": 4713,
+      "old": 374
+    },
+    {
+      "date": "Sep2019",
+      "new": 6531,
+      "old": 475
+    },
+    {
+      "date": "Oct2019",
+      "new": 8031,
+      "old": 913
+    },
+    {
+      "date": "Nov2019",
+      "new": 6725,
+      "old": 1032
+    },
+    {
+      "date": "Dec2019",
+      "new": 4781,
+      "old": 731
+    }
+  ]
+}

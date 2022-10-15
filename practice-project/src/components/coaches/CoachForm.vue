@@ -91,7 +91,7 @@ export default {
         this.formIsValid = true;
 
         if(this.firstname.val === '') {
-            this.formIsValid = false;
+            this.formIValid = false;
             this.firstname.isValid = false;
         }
         if(this.lastname.val === '') {

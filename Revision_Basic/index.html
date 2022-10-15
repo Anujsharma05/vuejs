@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vue Revision</title>
+        <meta charset="UTF-8">
+        <script src="https://unpkg.com/vue@next"></script>
+        <link rel="stylesheet" href="main.css">
+        <script src="app.js" defer></script>
+    </head>
+    <body>
+      <div>
+        afadsf
+      </div>
+        <div id="app">
+            <section>
+              <div>
+                <label :style="headingColor" for="goal">Goal</label>
+                <input type="text" id="goal" v-model="goal" />
+                <button @click="addGoal">Add Goal</button>
+              </div>
+              <ul>
+                <li :class="['color-yellow', changeColor]" v-for="g in goals" :key="g">{{ g }}</li>
+              </ul>
+            </section>
+            <section>
+              <div>
+                <label for="name">v-model logic</label>
+                <!-- <input type="text" id="name" v-bind:value="name" v-on:input="myMethod" /> -->
+                <input type="text" id="name" v-model="name" />
+                <button v-on:click="resetName">Reset</button>
+              </div>
+              <p>{{ name }}</p>
+              <div>
+                <span>{{ counter }}</span>
+                <button @click="counter++">Increment counter</button>
+
+              </div>
+            </section>
+            <section>
+              <div class="parent">
+                <div class="child">
+                  <p>hello world</p>
+                </div>
+              </div>
+            </section>
+        </div>
+        <script>
+            
+        </script>
+    </body>
+</html>

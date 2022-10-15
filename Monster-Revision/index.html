@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monster Slayer Revision</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <section class="scores">
+            <div>
+                <h1>You</h1>
+                <div class="health-bar">
+                    <h2>{{ playerHealth }}</h2>
+                    <div class="active-health" :style="{ width: playerHealth + '%'}"></div>
+                </div>
+            </div>
+            <div>
+                <h1>Monster</h1>
+                <div class="health-bar">
+                    <h2>{{ monsterHealth }}</h2>
+                    <div class="active-health" :style="{ width: monsterHealth + '%'}"></div>
+                </div>
+            </div>
+        </section>
+        <section class="controls">
+            <div class="start-button" v-if="!isRoundStarted" v-on:click="startOrEndGame">
+                Start the Game
+            </div>
+            <div class="actions" v-else>
+                <div v-on:click="attack">Attack</div>
+                <div v-on:click="specialAttack">Special Attack</div>
+                <div v-on:click="heal">Heal</div>
+                <div v-on:click="startOrEndGame">Give Up</div>
+            </div>
+        </section>
+        <section class="logs">
+            <ul>
+                <li v-for="(log,index) in matchLogs" :key="index">
+                    <p v-if="log.turn==='player'">Player hit monster for {{ log.dmg }}</p>
+                    <p v-else-if="log.turn==='monster'">Monster hit player for {{ log.dmg }}</p>
+                    <p v-else>Player heals for {{ log.dmg }}</p>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>

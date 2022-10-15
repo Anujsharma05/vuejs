@@ -15,6 +15,7 @@
 
       <div class="action-buttons">
         <slot name="deleteButton"></slot>
+        <slot name="deleteButton"></slot>
         <button @click="setEditMode" v-if="!item.isCompleted">Edit</button>
       </div>
     </section>
